@@ -7,12 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch\" \"nodemon ./server.js\"",
     "dev": "nodemon server.js"
-    
   },
   "author": "Antoine",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.2.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
