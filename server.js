@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
+app.use(express.json());
 require('dotenv').config();
 
 
@@ -13,21 +14,22 @@ app.use(express.static('dist'));
 MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.urtu5cf.mongodb.net/?retryWrites=true&w=majority`, { useUnifiedTopology: true })
   .then(client => {
     console.log('Connected to Database')
-  })
-  .catch(error => console.error(error))
-
     
-
     app.get('/', function (req, res) {
         res.sendFile(__dirname +'/dist/index.html')
        })
      
        app.post('/jobs', (req, res) => {
-        jobDatabase.push(req.body)
-        console.log(jobDatabase)
+        console.log(req.body)
        })
      
      app.listen(3000, function () {
          console.log('listening on 3000')
        })
+  
+  })
+  .catch(error => console.error(error))
+
+    
+
   
