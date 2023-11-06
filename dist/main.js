@@ -7,10 +7,8 @@ function addJob(e) {
     e.preventDefault();
     
     const formData = new FormData(form)
-for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
-}
-    console.log('wazzuuup')
+
+    
     fetch('/jobs',{
         method: 'POST',
         body: formData,
@@ -22,4 +20,5 @@ for (let [key, value] of formData.entries()) {
       .catch(error => {
         console.error('Error:', error);
       });
+      form.reset()
 }
