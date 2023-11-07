@@ -10,10 +10,10 @@
     Hello world!
   </h1>
   <form id="job-form" action="/jobs" method="POST">
-    <input type="text" placeholder="company" name="company" />
-    <input type="text" placeholder="job posting" name="job post" />
-    <input type="date" placeholder="date applied" name="date applied" />
-    <input type="text" placeholder="role" name="role" />
+    <input id="company" type="text" placeholder="company" name="company" required />
+    <input id="job-post" type="text" placeholder="job posting" name="job post" />
+    <input id="date" type="date" placeholder="date applied" name="date applied" required />
+    <input id="role" type="text" placeholder="role" name="role" required />
     <button type="submit">Submit</button>
   </form>
   <script src="main.js"></script>
