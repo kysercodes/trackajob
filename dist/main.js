@@ -15,10 +15,7 @@ function addJob(e) {
     }
     console.log(jobForm)
     
-  
-
-    
-    fetch('/jobs',{
+   fetch('/jobs',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,4 +31,4 @@ function addJob(e) {
         console.error('Error:', error);
       });
       form.reset()
-}
+} 
