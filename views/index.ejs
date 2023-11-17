@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/output.css" rel="stylesheet">
+
 </head>
 <body>
   <h1 class="text-cyan-500">
@@ -16,7 +17,22 @@
     <input id="role" type="text" placeholder="role" name="role" required />
     <button type="submit">Submit</button>
   </form>
-  <!-- <%= jobsCollection %> -->
-  <script src="main.js"></script>
+  
+  <h2>Quotes</h2>
+
+<ul class="jobs">
+  <!-- Loop through quotes -->
+  <% for(let i = 0; i < jobsCollection.length; i++) {%>
+  <li class="job">
+    <!-- Output name from the iterated quote object -->
+    <span><%= jobsCollection[i].name %></span>:
+    <!-- Output quote from the iterated quote object -->
+    <span><%= jobsCollection[i].date %></span>
+    <span><%= jobsCollection[i].role %></span>
+    <span><%= jobsCollection[i]["job post"] %></span>
+  </li>
+  <% } %>
+</ul>
+  <script src="/main.js"></script>
 </body>
 </html

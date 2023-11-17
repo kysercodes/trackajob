@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
-// const multer  = require('multer')
-// const upload = multer()
+const multer  = require('multer')
+const upload = multer()
 const app = express();
 app.set('view engine', 'ejs')
 const bodyParser = require('body-parser');
@@ -9,9 +9,10 @@ const bodyParser = require('body-parser');
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('dist'));
+
 app.use(express.json());
 const MongoClient = require('mongodb').MongoClient;
+app.use(express.static('dist'));
 
 // handles multi form
 
@@ -41,12 +42,15 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
     jobsCollection.find().toArray()
     .then(jobs => {
         console.log("Jobs fetched:", jobs);
-        res.json(jobs);  // Send jobs data as JSON
+        res.render('index.ejs',{jobsCollection: jobs})
+        // , {  }
     })
     .catch(error => {
         console.error('Error fetching data:', error);
         res.status(500).send('Error fetching data');
     });
+    // console.log('im working')
+    // res.send('GET request is working')
 });
 
   
