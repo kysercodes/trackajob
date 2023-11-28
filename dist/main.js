@@ -1,7 +1,10 @@
 
 const form = document.getElementById("job-form");
+const deletButton = document.querySelector("delete-btn");
+const jobItems = document.querySelectorAll('.job');
 
 form.addEventListener('submit',addJob)
+// deletButton.addEventListener('click',deleteJob)
 
 function addJob(e) {
     e.preventDefault();
@@ -32,3 +35,33 @@ function addJob(e) {
       });
       form.reset()
 } 
+
+document.querySelector('.jobs').addEventListener('click', function(e) {
+  if (e.target && e.target.classList.contains('delete-btn')) {
+    deleteJob(e);
+  }
+});
+
+function deleteJob(e) {
+  const jobItem = e.target.closest('.job');
+  const jobId = jobItem.getAttribute('data-job-id'); // Assuming each job has a data attribute for its ID
+
+  if (confirm('Are you sure you want to delete this job?')) {
+    fetch(`/jobs/${jobId}`, { method: 'DELETE', headers: { 'Content-Type': 'application/json' } })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        jobItem.remove(); // Only remove the job item from the DOM after successful deletion from the server
+      })
+      .catch(error => console.error('Error:', error));
+  }
+}
+
+// jobItems.forEach(job => {
+//   const statusButton = job.querySelector('button:first-of-type');
+//   const statusDropdown = job.querySelector('div div');
+
+//   statusButton.addEventListener('click', () => {
+//     statusDropdown.classList.toggle('hidden');
+//   });
+// });

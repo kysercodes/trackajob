@@ -8,28 +8,45 @@
 </head>
 <body>
   <h1 class="text-cyan-500">
-    Hello world!
+    TRAKAJOB
   </h1>
   <form id="job-form">
     <input id="company" type="text" placeholder="company" name="company" required />
     <input id="job-post" type="text" placeholder="job posting" name="job post" />
     <input id="date" type="date" placeholder="date applied" name="date applied" required />
     <input id="role" type="text" placeholder="role" name="role" required />
+    <select class="status-select bg-blue-500 text-white px-3 py-1 rounded">
+      <option value="">Select Status</option>
+      <option value="Applied">Applied</option>
+      <option value="Rejected">Not Hired</option>
+      <option value="Interview">Interview Set</option>
+      <!-- Add more statuses as needed -->
+    </select>
     <button type="submit">Submit</button>
   </form>
   
-  <h2>Quotes</h2>
+
 
 <ul class="jobs">
   <!-- Loop through quotes -->
   <% for(let i = 0; i < jobsCollection.length; i++) {%>
-  <li class="job">
+  <li class="job" data-job-id="<%= jobsCollection[i]._id %>">
     <!-- Output name from the iterated quote object -->
     <span><%= jobsCollection[i].name %></span>:
     <!-- Output quote from the iterated quote object -->
     <span><%= jobsCollection[i].date %></span>
     <span><%= jobsCollection[i].role %></span>
     <span><%= jobsCollection[i]["job post"] %></span>
+    <select class="status-select bg-blue-500 text-white px-3 py-1 rounded">
+      <option value="">Select Status</option>
+      <option value="Applied" <%= jobsCollection[i].status === 'Applied' ? 'selected' : '' %>>Applied</option>
+      <option value="Rejected" <%= jobsCollection[i].status === 'Rejected' ? 'selected' : '' %>>Not Hired</option>
+      <option value="Interview" <%= jobsCollection[i].status === 'Interview' ? 'selected' : '' %>>Interview Set</option>
+      <!-- Add more statuses as needed -->
+    </select>
+    
+
+    <button class="delete-btn bg-blue-500 text-white px-3 py-1 rounded"  >delete</button>
   </li>
   <% } %>
 </ul>

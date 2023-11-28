@@ -1,5 +1,8 @@
+const { MongoClient, ObjectId } = require('mongodb');
 const express = require('express');
 require('dotenv').config();
+
+
 const multer  = require('multer')
 const upload = multer()
 const app = express();
@@ -11,7 +14,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.json());
-const MongoClient = require('mongodb').MongoClient;
+// const { ObjectID } = require('mongodb');
+
+// const MongoClient = require('mongodb').MongoClient;
 app.use(express.static('dist'));
 
 // handles multi form
@@ -63,6 +68,20 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
           })
           .catch(error => console.error(error))
        })
+       app.delete('/jobs/:jobId', (req, res) => {
+        const { jobId } = req.params;
+        jobsCollection.deleteOne({ _id: new ObjectId(jobId) })
+          .then(result => {
+            if (result.deletedCount === 0) {
+              return res.status(404).json({ message: 'Job not found' });
+            }
+            res.json({ message: 'Job deleted successfully' });
+          })
+          .catch(error => {
+            console.error('Error deleting job:', error);
+            res.status(500).json({ message: 'Error deleting job' });
+          });
+      });
      
      app.listen(2000, function () {
          console.log('listening on 155165 foo')
