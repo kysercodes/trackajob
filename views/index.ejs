@@ -7,7 +7,8 @@
 
 </head>
 <body>
-  <h1 class="text-cyan-500">
+  <header class="container max-w-4xl m-auto">
+  <h1 class="text-cyan-500 text-center">
     TRAKAJOB
   </h1>
   <form id="job-form">
@@ -15,18 +16,19 @@
     <input id="job-post" type="text" placeholder="job posting" name="job post" />
     <input id="date" type="date" placeholder="date applied" name="date applied" required />
     <input id="role" type="text" placeholder="role" name="role" required />
-    <select class="status-select bg-blue-500 text-white px-3 py-1 rounded">
+    <select id="status" class="status-select bg-blue-500 text-white px-2 py-1 rounded">
       <option value="">Select Status</option>
       <option value="Applied">Applied</option>
       <option value="Rejected">Not Hired</option>
       <option value="Interview">Interview Set</option>
+      <option value="Interview-had">Interviewed</option>
       <!-- Add more statuses as needed -->
     </select>
-    <button type="submit">Submit</button>
+    <button type="submit" class=" bg-blue-500 text-white px-1 py-1 rounded">Submit</button>
   </form>
-  
+  </header>
 
-
+<section class="job-posts max-w-5xl m-auto">
 <ul class="jobs">
   <!-- Loop through quotes -->
   <% for(let i = 0; i < jobsCollection.length; i++) {%>
@@ -46,10 +48,11 @@
     </select>
     
 
-    <button class="delete-btn bg-blue-500 text-white px-3 py-1 rounded"  >delete</button>
+    <button class="delete-btn bg-blue-500 text-white px-3 py-1 rounded">delete</button>
   </li>
   <% } %>
 </ul>
+</section>
   <script src="/main.js"></script>
 </body>
 </html

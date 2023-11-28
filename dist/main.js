@@ -14,7 +14,8 @@ function addJob(e) {
       name: document.getElementById('company').value.trim(),
       "job post":  document.getElementById('job-post').value.trim(),
       date: document.getElementById('date').value.trim(),
-      role: document.getElementById('role').value.trim()
+      role: document.getElementById('role').value.trim(),
+      status: document.getElementById('status').value.trim()
     }
     console.log(jobForm)
     
