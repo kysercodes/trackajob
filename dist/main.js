@@ -37,6 +37,8 @@ function addJob(e) {
       form.reset()
 } 
 
+// these are my notes for my test branch holler atcha boy
+
 document.querySelector('.jobs').addEventListener('click', function(e) {
   if (e.target && e.target.classList.contains('delete-btn')) {
     deleteJob(e);
