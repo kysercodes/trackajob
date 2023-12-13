@@ -60,8 +60,7 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
 
   
     // upload.none(),
-     
-       app.post('/jobs', (req, res) => {
+      app.post('/jobs', (req, res) => {
         jobsCollection.insertOne(req.body)
         .then(result => {
             console.log(result)
@@ -69,6 +68,8 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
           })
           .catch(error => console.error(error))
        })
+
+       
        app.delete('/jobs/:jobId', (req, res) => {
         const { jobId } = req.params;
         jobsCollection.deleteOne({ _id: new ObjectId(jobId) })
@@ -93,4 +94,4 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
 
     
 
-  
+ 
