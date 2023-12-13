@@ -65,6 +65,7 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
         jobsCollection.insertOne(req.body)
         .then(result => {
             console.log(result)
+            res.redirect('/')
           })
           .catch(error => console.error(error))
        })
