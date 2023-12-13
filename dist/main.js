@@ -35,6 +35,8 @@ function addJob(e) {
         console.error('Error:', error);
       });
       form.reset()
+      window.location.reload();
+
 } 
 
 document.querySelector('.jobs').addEventListener('click', function(e) {

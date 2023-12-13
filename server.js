@@ -46,7 +46,7 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
   app.get('/', (req, res) => {
     jobsCollection.find().toArray()
     .then(jobs => {
-        console.log("Jobs fetched:", jobs);
+        // console.log("Jobs fetched:", jobs);
         res.render('index.ejs',{jobsCollection: jobs})
         // , {  }
     })
@@ -64,7 +64,7 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
        app.post('/jobs', (req, res) => {
         jobsCollection.insertOne(req.body)
         .then(result => {
-            console.log(result)
+            console.log('result')
             res.redirect('/')
           })
           .catch(error => console.error(error))
