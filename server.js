@@ -1,14 +1,15 @@
 const { MongoClient, ObjectId } = require('mongodb');
+
 const express = require('express');
 require('dotenv').config();
-
+const cors = require('cors');
 
 const multer  = require('multer')
 const upload = multer()
 const app = express();
 app.set('view engine', 'ejs')
 const bodyParser = require('body-parser');
-
+app.use(cors());
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -83,6 +84,24 @@ MongoClient.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSW
             res.status(500).json({ message: 'Error deleting job' });
           });
       });
+
+      app.post('/update-job-status', (req, res) => {
+        const { jobId, newStatus } = req.body;
+        
+      console.log(`hi i'm the ${jobId}`)
+       jobsCollection.updateOne(
+          { _id: new ObjectId(jobId) },
+          { $set: { status: newStatus } }
+        )
+        .then(result => {
+          res.json({ message: 'Status updated successfully' });
+        })
+        .catch(error => {
+          console.error(error);
+          res.status(500).send('Error updating status');
+        });
+      });
+      
      
      app.listen(2000, function () {
          console.log('listening on 155165 foo')

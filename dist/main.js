@@ -2,7 +2,7 @@
 const form = document.getElementById("job-form");
 const deletButton = document.querySelector("delete-btn");
 const jobItems = document.querySelectorAll('.job');
-
+// const jobId = jobItem.getAttribute('data-job-id')
 form.addEventListener('submit',addJob)
 // deletButton.addEventListener('click',deleteJob)
 
@@ -59,6 +59,37 @@ function deleteJob(e) {
       .catch(error => console.error('Error:', error));
   }
 }
+
+document.querySelector('.jobs').addEventListener('change', function(event) {
+  // Check if the event target is a select element with the class 'status-select'
+  if (event.target && event.target.matches('.status-select')) {
+    const selectElement = event.target;
+    const jobItem = selectElement.closest('.job');
+    const jobId = jobItem.getAttribute('data-job-id');
+
+    const newStatus = selectElement.value;
+    console.log(jobId);
+
+
+    fetch('/update-job-status', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ jobId, newStatus }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      // Optionally, do something on the client side after the update
+      // window.location.reload();
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+  }
+});
 
 // jobItems.forEach(job => {
 //   const statusButton = job.querySelector('button:first-of-type');
