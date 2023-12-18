@@ -99,3 +99,28 @@ document.querySelector('.jobs').addEventListener('change', function(event) {
 //     statusDropdown.classList.toggle('hidden');
 //   });
 // });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const statusSelects = document.querySelectorAll('.status-select');
+  
+  statusSelects.forEach(select => {
+    updateSelectColor(select);
+    select.addEventListener('change', () => updateSelectColor(select));
+  });
+});
+
+function updateSelectColor(select) {
+  const status = select.value;
+  select.className = 'status-select text-white px-3 py-1 rounded'; // Reset class
+  select.classList.add(getTailwindColorForStatus(status));
+}
+
+function getTailwindColorForStatus(status) {
+  switch (status) {
+    case 'Applied': return 'bg-blue-500';
+    case 'Rejected': return 'bg-red-500';
+    case 'Interview': return 'bg-yellow-500';
+    case 'Interviewed': return 'bg-green-500';
+    default: return 'bg-gray-500';
+  }
+}
